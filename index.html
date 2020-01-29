@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>music</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>music</h1>
+    <form id="artist-form">
+      <input type="text" name="artist-entry" id="artist-entry" placeholder="e.g., Beyonce">
+      <button type="submit" id="submit">Submit</button>
+    </form>
+
+    <p id="js-error-message" class="error-message"></p>
+    
+    <section id="results" class="hidden">
+      <h2>Search results</h2>
+      <ul id="results-list">
+      </ul>
+    </section>
+  </div>
+
+  <!-- PAGE JAVASCRIPT -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="index.js"></script>
+  <!-- END PAGE JAVASCRIPT -->
+</body>
+</html>
