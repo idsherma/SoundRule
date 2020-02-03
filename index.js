@@ -3,7 +3,8 @@
     }(function($, window, document) {
 
       'use strict';
-
+    
+    //https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages&piprop=thumbnail&pithumbsize=600&titles=Beyoncé
     const apiKey = '8cb97c698ec56a88c2e659cb16fd3985';
 
     let artistInfoURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo';
@@ -48,17 +49,25 @@
             .then(values => Promise.all(values.map(value => value.json())))
             .then(finalVals => {
               let artistAPIResp = finalVals[0];
+              //console.log(artistAPIResp.artist.name);
               let trackAPIResp = finalVals[1];
-              displayResults(artistAPIResp, trackAPIResp);
-            });
+
+              //getArtistImage(artistAPIResp, trackAPIResp);
+            })
+            .then();
         }
 
         getData();
     }
 
+    // function getArtistImage(artistAPIResp, trackAPIResp) {
+    //   console.log(artistAPIResp);
+    // }
+
     function displayResults(artistAPIResponse, artistTrackAPIResponse) {
 
         let artistName = artistAPIResponse.artist;
+        //console.log(artistAPIResponse.artist.name);
 
         $('#results-list').empty();
 
