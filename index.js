@@ -3,12 +3,12 @@
     }(function($, window, document) {
 
       'use strict';
-    
-    //https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages&piprop=thumbnail&pithumbsize=600&titles=Beyoncé
+
     const apiKey = '8cb97c698ec56a88c2e659cb16fd3985';
 
     let artistInfoURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo';
     let trackInfoURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks';
+    let wikiImageURL = 'https://en.wikipedia.org/w/api.php?action=query';
 
     //sanitize our user input and create the query item
     function formatQueryParams(params) {
@@ -18,6 +18,11 @@
 
     function formatQueryParams(params2) {
       const queryItems = Object.keys(params2).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params2[key])}`)
+      return queryItems.join('&');
+    }
+
+    function formatQueryParams(params3) {
+      const queryItems = Object.keys(params3).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params3[key])}`)
       return queryItems.join('&');
     }
     
@@ -34,16 +39,28 @@
           limit: 5,
           api_key: apiKey
         }
+
+        const params3 = {
+          prop: "pageimages",
+          piprop: 'thumbnail',
+          pithumbsize: 600,
+          titles: ''
+        }
       
-        const queryString = formatQueryParams(params)
-        const queryString2 = formatQueryParams(params2)
+        const queryString = formatQueryParams(params);
+        const queryString2 = formatQueryParams(params2);
+        const queryString3 = formatQueryParams(params3);
+
 
         const artistURL = artistInfoURL + '&' + queryString + '&format=json';
         const trackURL = trackInfoURL + '&' + queryString2 + '&format=json';
+        const imageURL = wikiImageURL + '&format=json&formatversion=2&' + queryString3;
+        //console.log(imageURL);
         
         function getData() {
           let artistData = fetch(artistURL);
           let trackData = fetch(trackURL);
+          //let imageData = fetch(imageURL);
         
           Promise.all([artistData, trackData])
             .then(values => Promise.all(values.map(value => value.json())))
@@ -51,10 +68,9 @@
               let artistAPIResp = finalVals[0];
               //console.log(artistAPIResp.artist.name);
               let trackAPIResp = finalVals[1];
-
+              //console.log(finalVals);
               //getArtistImage(artistAPIResp, trackAPIResp);
             })
-            .then();
         }
 
         getData();
