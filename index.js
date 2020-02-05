@@ -5,9 +5,12 @@
       'use strict';
 
     const apiKey = '8cb97c698ec56a88c2e659cb16fd3985';
-
+    
+    //LAST FM API
     let artistInfoURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo';
     let trackInfoURL = 'https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks';
+
+    //WIKIPEDIA API
     let wikiImageURL = 'https://en.wikipedia.org/w/api.php?action=query';
 
     //sanitize our user input and create the query item
@@ -45,21 +48,17 @@
 
         const artistURL = artistInfoURL + '&' + queryString + '&format=json';
         const trackURL = trackInfoURL + '&' + queryString2 + '&format=json';
-
-        //console.log(imageURL);
         
         function getData() {
           let artistData = fetch(artistURL);
           let trackData = fetch(trackURL);
-          //let imageData = fetch(imageURL);
         
           Promise.all([artistData, trackData])
             .then(values => Promise.all(values.map(value => value.json())))
             .then(finalVals => {
               let artistAPIResp = finalVals[0];
-              //console.log(artistAPIResp.artist.name);
               let trackAPIResp = finalVals[1];
-              //console.log(finalVals);
+
               getArtistImage(artistAPIResp);
               displayResults(trackAPIResp, artistAPIResp);
             })
@@ -72,7 +71,6 @@
       $('#artist-image').empty();
 
       let artistVar = artistAPIResp.artist;
-      //console.log(artistVar);
 
       if (artistVar === undefined) {
         
@@ -92,7 +90,6 @@
         const queryString3 = formatQueryParams(params3);
 
         const imageURL = wikiImageURL + '&format=json&formatversion=2&' + queryString3;
-        //console.log(imageURL);
 
         fetch(imageURL)
         .then(response => {
@@ -101,17 +98,25 @@
           }
           throw new Error(response.statusText);
         })
-        .then(imageData => displayImage(imageData))
+        .then(imageData => {
+          let imgDataQuery = imageData.query.pages[0];
+
+          if(imgDataQuery.hasOwnProperty("thumbnail")) {
+            displayImage(imageData);
+          } else {
+            $('#artist-image').append(
+              `<img src="https://via.placeholder.com/600x600/000000/FFFFFF/?text=Image+Unavailable" alt="Image Unavailable">`
+            );
+          }
+
+        })
         .catch(err => {
           $('#js-error-message').text(`Something went wrong: ${err.message}`);
         });
 
         function displayImage(imageData) {
           let artistImage = imageData.query.pages[0].thumbnail.source;
-          //console.log(imageData);
-    
-          //$('#artist-image').empty();
-    
+
           $('#artist-image').append(
             `<img src="${artistImage}" alt="">`
           );
@@ -126,13 +131,10 @@
 
     function displayResults(artistTrackAPIResponse, artistAPIResponse) {
 
-        //console.log(imageData);
-
         let artistName = artistAPIResponse.artist;
-        //console.log(artistAPIResponse.artist.name);
 
         $('#artist-info').empty();
-        //debugger;
+
         //checking if an artist exists
         if(artistName === undefined) {
           $('#artist-info').append(
@@ -194,8 +196,6 @@
           );
         }
 
-
-
         //display the results section
         $('#results').removeClass('hidden');
 
@@ -206,7 +206,7 @@
             event.preventDefault();
 
             let artistEntry = $('#artist-entry').val();
-            //console.log(tvShowEntry);
+;
            getShows(artistEntry);
 
            $('#artist-form')[0].reset();

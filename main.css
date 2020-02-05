@@ -6,6 +6,13 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+
 h1, h2, p {
   text-align: center;
 }
@@ -38,15 +45,17 @@ li label {
   margin: 0 auto;
 }
 
+#artist-image img {
+  display: block;
+  margin: 0 auto;
+}
+
 #results li {
   padding: 0 10px 10px 10px;
   margin: 0;
   text-align: center;
 }
 
-/* #results-list li h3, #results-list li p {
-  text-align: left;
-}  */
 
 #results-list {
   border: 1px solid black;
