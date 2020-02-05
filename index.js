@@ -39,22 +39,13 @@
           limit: 5,
           api_key: apiKey
         }
-
-        const params3 = {
-          prop: "pageimages",
-          piprop: 'thumbnail',
-          pithumbsize: 600,
-          titles: ''
-        }
       
         const queryString = formatQueryParams(params);
         const queryString2 = formatQueryParams(params2);
-        const queryString3 = formatQueryParams(params3);
-
 
         const artistURL = artistInfoURL + '&' + queryString + '&format=json';
         const trackURL = trackInfoURL + '&' + queryString2 + '&format=json';
-        const imageURL = wikiImageURL + '&format=json&formatversion=2&' + queryString3;
+
         //console.log(imageURL);
         
         function getData() {
@@ -69,35 +60,90 @@
               //console.log(artistAPIResp.artist.name);
               let trackAPIResp = finalVals[1];
               //console.log(finalVals);
-              //getArtistImage(artistAPIResp, trackAPIResp);
+              getArtistImage(artistAPIResp);
+              displayResults(trackAPIResp, artistAPIResp);
             })
         }
 
         getData();
     }
 
-    // function getArtistImage(artistAPIResp, trackAPIResp) {
-    //   console.log(artistAPIResp);
-    // }
+    function getArtistImage(artistAPIResp) {
+      $('#artist-image').empty();
 
-    function displayResults(artistAPIResponse, artistTrackAPIResponse) {
+      let artistVar = artistAPIResp.artist;
+      //console.log(artistVar);
+
+      if (artistVar === undefined) {
+        
+        $('#artist-image').append(
+          `<img src="https://via.placeholder.com/600x600/000000/FFFFFF/?text=Image+Unavailable" alt="Image Unavailable">`
+        );
+  
+      } else {
+        const params3 = {
+          prop: "pageimages",
+          piprop: 'thumbnail',
+          pithumbsize: 600,
+          titles: artistAPIResp.artist.name,
+          origin: '*'
+        }
+
+        const queryString3 = formatQueryParams(params3);
+
+        const imageURL = wikiImageURL + '&format=json&formatversion=2&' + queryString3;
+        //console.log(imageURL);
+
+        fetch(imageURL)
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error(response.statusText);
+        })
+        .then(imageData => displayImage(imageData))
+        .catch(err => {
+          $('#js-error-message').text(`Something went wrong: ${err.message}`);
+        });
+
+        function displayImage(imageData) {
+          let artistImage = imageData.query.pages[0].thumbnail.source;
+          //console.log(imageData);
+    
+          //$('#artist-image').empty();
+    
+          $('#artist-image').append(
+            `<img src="${artistImage}" alt="">`
+          );
+    
+        }
+      }
+
+      //display the results section
+      $('#results').removeClass('hidden');
+
+    }
+
+    function displayResults(artistTrackAPIResponse, artistAPIResponse) {
+
+        //console.log(imageData);
 
         let artistName = artistAPIResponse.artist;
         //console.log(artistAPIResponse.artist.name);
 
-        $('#results-list').empty();
-
+        $('#artist-info').empty();
+        //debugger;
         //checking if an artist exists
         if(artistName === undefined) {
-          $('#results-list').append(
+          $('#artist-info').append(
             `<li>
-              </p>This artist does not exist. Sorry, try again!</p>
+              <p>This artist does not exist. Sorry, try again!</p>
             </li>`
           );
 
         } else if (artistAPIResponse.artist.similar.artist.length === 0) {
           //checking if an artists similar track exists
-          $('#results-list').append(
+          $('#artist-info').append(
             `<li>
             <h3>${artistAPIResponse.artist.name}</h3>
             <p>${artistAPIResponse.artist.bio.summary}</p>
@@ -120,7 +166,7 @@
 
         } else {
 
-          $('#results-list').append(
+          $('#artist-info').append(
             `<li>
             <h3>${artistAPIResponse.artist.name}</h3>
             <p>${artistAPIResponse.artist.bio.summary}</p>
