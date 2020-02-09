@@ -48,6 +48,8 @@
 
         const artistURL = artistInfoURL + '&' + queryString + '&format=json';
         const trackURL = trackInfoURL + '&' + queryString2 + '&format=json';
+
+        console.log(artistURL);
         
         function getData() {
           let artistData = fetch(artistURL);
@@ -90,6 +92,7 @@
         const queryString3 = formatQueryParams(params3);
 
         const imageURL = wikiImageURL + '&format=json&formatversion=2&' + queryString3;
+        console.log(imageURL);
 
         fetch(imageURL)
         .then(response => {
@@ -128,6 +131,11 @@
       $('#results').removeClass('hidden');
 
     }
+
+    //to use to convert numbers and add commas
+    // function numberWithCommas(x) {
+    //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // }
 
     function displayResults(artistTrackAPIResponse, artistAPIResponse) {
 
@@ -206,7 +214,7 @@
             event.preventDefault();
 
             let artistEntry = $('#artist-entry').val();
-;
+
            getShows(artistEntry);
 
            $('#artist-form')[0].reset();
