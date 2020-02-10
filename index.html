@@ -19,24 +19,24 @@
       <button type="submit" id="submit">Submit</button>
     </form>
 
-    <div class="soundrule-cards">
+    <!-- <div class="soundrule-cards">
       <div class="soundrule-cards__card-wrapper">
         <div class="artist-card">
           <div class="artist-card__wrapper">
             <div class="photo-parent">
-                <div class="artist-card__photo">
+                <div id="artist-image" class="artist-card__photo">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Beyonce_-_The_Formation_World_Tour%2C_at_Wembley_Stadium_in_London%2C_England.jpg/406px-Beyonce_-_The_Formation_World_Tour%2C_at_Wembley_Stadium_in_London%2C_England.jpg" alt="Beyoncé">
                 </div>
             </div>
             
-            <div class="artist-bio-parent">
-                <h2 class="artist-card--content--name">Beyoncé</h2>
+            <div id="bio-parent" class="artist-bio-parent">
+                <h2 id="artist-name" class="artist-card--content--name">Beyoncé</h2>
                 <div class="playcount-wrapper">
                   <div class="play-button">
                       <span class="play"></span>
                   </div>
                   <p class="playcount">
-                    Play count: <span class="playcount__playcount-selection">172,106,583</span>
+                    Play count: <span id="play-count" class="playcount__playcount-selection">172,106,583</span>
                   </p>
                 </div>
                 <h3 class="artist-card__title">Top tracks:</h3>
@@ -49,11 +49,69 @@
                 </ul>
             </div>
           </div>
-          <div class="artist-card__copy">
+          
+          <div id="biography" class="artist-card__copy">
               <p>Beyoncé (born Beyoncé Giselle Knowles, September 4, 1981) is an American pop/RnB singer, playcountwriter, record producer, actress and model. She is the older sister of RnB singer Solange. Beyoncé was named Billboard's Top Female Artist of the 2000s in February 2009 as well as their Artist of the Millennium in May 2011. She was the RIAA's top certified and best-selling overall artist of the decade and the NRJ Music Awards also awarded her as their Artist of the Decade in France.</p>
           </div>
 
-          <div class="artist-card__similar-card">
+           <div id="similar-card" class="artist-card__similar-card">
+            <h3 class="artist-card__title">Similar Artists:</h3>
+            <ul class="artist-card__similar-card--content">
+              <li>Destiny's Child</li>
+              <li>Rihanna</li>
+              <li>Kelly Rowland</li>
+              <li>Solange</li>
+              <li>Nicki Minaj</li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <p id="js-error-message" class="error-message"></p>
+    
+    <section id="results" class="hidden">
+      <!-- <ul id="results-list">
+        <div id="artist-image"></div>
+        <div id="artist-info"></div>
+      </ul> -->
+
+  <!-- <div class="soundrule-cards">
+      <div class="soundrule-cards__card-wrapper">
+        <div class="artist-card">
+          <div class="artist-card__wrapper">
+            <div class="photo-parent">
+                <div id="artist-image" class="artist-card__photo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Beyonce_-_The_Formation_World_Tour%2C_at_Wembley_Stadium_in_London%2C_England.jpg/406px-Beyonce_-_The_Formation_World_Tour%2C_at_Wembley_Stadium_in_London%2C_England.jpg" alt="Beyoncé">
+                </div>
+            </div>
+            
+            <div id="bio-parent" class="artist-bio-parent">
+                <h2 id="artist-name" class="artist-card--content--name">Beyoncé</h2>
+                <div class="playcount-wrapper">
+                  <div class="play-button">
+                      <span class="play"></span>
+                  </div>
+                  <p class="playcount">
+                    Play count: <span id="play-count" class="playcount__playcount-selection">172,106,583</span>
+                  </p>
+                </div>
+                <h3 class="artist-card__title">Top tracks:</h3>
+                <ul class="artist-card__tracks">
+                  <li>Halo</li>
+                  <li>Irreplaceable</li>
+                  <li>Single Ladies (Put a Ring on It)</li>
+                  <li>Crazy in Love</li>
+                  <li>If I Were a Boy</li>
+                </ul>
+            </div>
+          </div>
+          
+          <div id="biography" class="artist-card__copy">
+              <p>Beyoncé (born Beyoncé Giselle Knowles, September 4, 1981) is an American pop/RnB singer, playcountwriter, record producer, actress and model. She is the older sister of RnB singer Solange. Beyoncé was named Billboard's Top Female Artist of the 2000s in February 2009 as well as their Artist of the Millennium in May 2011. She was the RIAA's top certified and best-selling overall artist of the decade and the NRJ Music Awards also awarded her as their Artist of the Decade in France.</p>
+          </div>
+
+           <div id="similar-card" class="artist-card__similar-card">
             <h3 class="artist-card__title">Similar Artists:</h3>
             <ul class="artist-card__similar-card--content">
               <li>Destiny's Child</li>
@@ -66,15 +124,6 @@
         </div>
       </div>
     </div>
-
-    <p id="js-error-message" class="error-message"></p>
-    
-    <section id="results" class="hidden">
-      <ul id="results-list">
-        <div id="artist-image"></div>
-        <div id="artist-info"></div>
-      </ul>
-
 
     </section>
   </div>

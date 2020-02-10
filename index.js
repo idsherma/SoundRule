@@ -29,7 +29,7 @@
       return queryItems.join('&');
     }
     
-    function getShows(query) {
+    function getArtists(query) {
 
         const params = {
           artist: query,
@@ -81,6 +81,7 @@
         );
   
       } else {
+
         const params3 = {
           prop: "pageimages",
           piprop: 'thumbnail',
@@ -119,9 +120,10 @@
 
         function displayImage(imageData) {
           let artistImage = imageData.query.pages[0].thumbnail.source;
+          let artistTitle = imageData.query.pages[0].title;
 
           $('#artist-image').append(
-            `<img src="${artistImage}" alt="">`
+            `<img src="${artistImage}" alt="${artistTitle}">`
           );
     
         }
@@ -138,8 +140,12 @@
     // }
 
     function displayResults(artistTrackAPIResponse, artistAPIResponse) {
-
+      
+        //playcount
+        //console.log(artistAPIResponse.artist.stats.playcount);
+        
         let artistName = artistAPIResponse.artist;
+        //let artistPlayCount = artistAPIResponse.artist.stats.playcount;
 
         $('#artist-info').empty();
 
@@ -152,6 +158,7 @@
           );
 
         } else if (artistAPIResponse.artist.similar.artist.length === 0) {
+          
           //checking if an artists similar track exists
           $('#artist-info').append(
             `<li>
@@ -175,11 +182,24 @@
           );
 
         } else {
+          //debugger;
+          //let artistPlayCount = artistAPIResponse.artist.stats.playcount;
+          //console.log(artistPlayCount);
+
+          // function numberWithCommas(artistPlayCount) {
+          //   return artistPlayCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          // }
+
+          // numberWithCommas(artistPlayCount);
+          //console.log('hi?');
+          //<p>PLAY COUNT: ${artistPlayCount}</p>
 
           $('#artist-info').append(
             `<li>
             <h3>${artistAPIResponse.artist.name}</h3>
             <p>${artistAPIResponse.artist.bio.summary}</p>
+
+            
             
             <p>Top 5 Tracks:</p>
               <ul>
@@ -190,7 +210,6 @@
                 <li>${artistTrackAPIResponse.toptracks.track[4].name}</li>
               </ul>
             </li>
-            
             
             <p>Similar Artists:</p>
             <ul>
@@ -213,9 +232,14 @@
         $('form').submit(event => {
             event.preventDefault();
 
-            let artistEntry = $('#artist-entry').val();
+          let artistEntry = $('#artist-entry').val();
 
-           getShows(artistEntry);
+          if(artistEntry === '') {
+            alert('Input can not be left blank');
+            return;
+          }
+
+          getArtists(artistEntry);
 
            $('#artist-form')[0].reset();
         });
