@@ -13,34 +13,34 @@
 
   <div class="container">
     <h1 class="headline">SoundRule <span>&#127911;</span></h1>
+    <p class="intro-copy">Search for any artist:</p>
     <form id="artist-form">
       <input type="text" name="artist-entry" id="artist-entry" placeholder="e.g., Beyoncé">
       <button type="submit" id="submit">Submit</button>
     </form>
-  
-    <div class="cnnix-cards">
-      <div class="cnnix-cards__card-wrapper">
-        <div class="audio-card">
-          <div class="audio-card__wrapper">
-            <div class="wrp-1">
-                <div class="audio-card__photo">
+
+    <div class="soundrule-cards">
+      <div class="soundrule-cards__card-wrapper">
+        <div class="artist-card">
+          <div class="artist-card__wrapper">
+            <div class="photo-parent">
+                <div class="artist-card__photo">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Beyonce_-_The_Formation_World_Tour%2C_at_Wembley_Stadium_in_London%2C_England.jpg/406px-Beyonce_-_The_Formation_World_Tour%2C_at_Wembley_Stadium_in_London%2C_England.jpg" alt="Beyoncé">
                 </div>
             </div>
-            <div class="wrp-2">
-                <div class="audio-card__content">
-                  <h2 class="audio-card__content--name">Beyoncé</h2>
-                </div>
-                <div class="audio-wrapper">
+            
+            <div class="artist-bio-parent">
+                <h2 class="artist-card--content--name">Beyoncé</h2>
+                <div class="playcount-wrapper">
                   <div class="play-button">
                       <span class="play"></span>
                   </div>
-                  <p class="song">
-                    Play count: <span class="song__song-selection">172,106,583</span>
+                  <p class="playcount">
+                    Play count: <span class="playcount__playcount-selection">172,106,583</span>
                   </p>
                 </div>
-                <h3 class="audio-card__title">Top tracks:</h3>
-                <ul class="audio-card__nomination">
+                <h3 class="artist-card__title">Top tracks:</h3>
+                <ul class="artist-card__tracks">
                   <li>Halo</li>
                   <li>Irreplaceable</li>
                   <li>Single Ladies (Put a Ring on It)</li>
@@ -49,13 +49,13 @@
                 </ul>
             </div>
           </div>
-          <div class="copy">
-              <p>Beyoncé (born Beyoncé Giselle Knowles, September 4, 1981) is an American pop/RnB singer, songwriter, record producer, actress and model. She is the older sister of RnB singer Solange. Beyoncé was named Billboard's Top Female Artist of the 2000s in February 2009 as well as their Artist of the Millennium in May 2011. She was the RIAA's top certified and best-selling overall artist of the decade and the NRJ Music Awards also awarded her as their Artist of the Decade in France.</p>
+          <div class="artist-card__copy">
+              <p>Beyoncé (born Beyoncé Giselle Knowles, September 4, 1981) is an American pop/RnB singer, playcountwriter, record producer, actress and model. She is the older sister of RnB singer Solange. Beyoncé was named Billboard's Top Female Artist of the 2000s in February 2009 as well as their Artist of the Millennium in May 2011. She was the RIAA's top certified and best-selling overall artist of the decade and the NRJ Music Awards also awarded her as their Artist of the Decade in France.</p>
           </div>
 
-          <div class="similar-artist">
-            <h3 class="audio-card__title">Similar Artists:</h3>
-            <ul class="similar-artist__content">
+          <div class="artist-card__similar-card">
+            <h3 class="artist-card__title">Similar Artists:</h3>
+            <ul class="artist-card__similar-card--content">
               <li>Destiny's Child</li>
               <li>Rihanna</li>
               <li>Kelly Rowland</li>
@@ -74,6 +74,8 @@
         <div id="artist-image"></div>
         <div id="artist-info"></div>
       </ul>
+
+
     </section>
   </div>
 
