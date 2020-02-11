@@ -19,38 +19,26 @@
         return queryItems.join('&');
     }
 
-    function formatQueryParams(params2) {
-      const queryItems = Object.keys(params2).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params2[key])}`)
-      return queryItems.join('&');
-    }
-
-    function formatQueryParams(params3) {
-      const queryItems = Object.keys(params3).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params3[key])}`)
-      return queryItems.join('&');
-    }
-    
     function getArtists(query) {
 
-        const params = {
+        const artistInfoParams = {
           artist: query,
           autocorrect: 1,
           api_key: apiKey
         };
 
-        const params2 = {
+        const trackInfoParams = {
           artist: query,
           limit: 5,
           api_key: apiKey
         }
-      
-        const queryString = formatQueryParams(params);
-        const queryString2 = formatQueryParams(params2);
 
-        const artistURL = artistInfoURL + '&' + queryString + '&format=json';
-        const trackURL = trackInfoURL + '&' + queryString2 + '&format=json';
+        const artistQueryString = formatQueryParams(artistInfoParams);
+        const trackQueryString = formatQueryParams(trackInfoParams);
 
-        console.log(artistURL);
-        
+        const artistURL = artistInfoURL + '&' + artistQueryString + '&format=json';
+        const trackURL = trackInfoURL + '&' + trackQueryString + '&format=json';
+
         function getData() {
           let artistData = fetch(artistURL);
           let trackData = fetch(trackURL);
@@ -81,8 +69,8 @@
         );
   
       } else {
-
-        const params3 = {
+        
+        const imageParams = {
           prop: "pageimages",
           piprop: 'thumbnail',
           pithumbsize: 600,
@@ -90,10 +78,9 @@
           origin: '*'
         }
 
-        const queryString3 = formatQueryParams(params3);
+        const imageQueryString = formatQueryParams(imageParams);
 
-        const imageURL = wikiImageURL + '&format=json&formatversion=2&' + queryString3;
-        console.log(imageURL);
+        const imageURL = wikiImageURL + '&format=json&formatversion=2&' + imageQueryString;
 
         fetch(imageURL)
         .then(response => {
@@ -132,29 +119,19 @@
       //display the results section
       $('#results').removeClass('hidden');
 
-    }
-
-    //to use to convert numbers and add commas
-    // function numberWithCommas(x) {
-    //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // }
+    } 
 
     function displayResults(artistTrackAPIResponse, artistAPIResponse) {
       
-        //playcount
-        //console.log(artistAPIResponse.artist.stats.playcount);
-        
+        let formattedPlayCount;
         let artistName = artistAPIResponse.artist;
-        //let artistPlayCount = artistAPIResponse.artist.stats.playcount;
 
-        $('#artist-info').empty();
+        $('#bio-parent, #biography, #similar-card').empty();
 
         //checking if an artist exists
         if(artistName === undefined) {
-          $('#artist-info').append(
-            `<li>
-              <p>This artist does not exist. Sorry, try again!</p>
-            </li>`
+          $('#bio-parent').append(
+            `<p>This artist does not exist. Sorry, try again!</p>`
           );
 
         } else if (artistAPIResponse.artist.similar.artist.length === 0) {
@@ -182,45 +159,46 @@
           );
 
         } else {
-          //debugger;
-          //let artistPlayCount = artistAPIResponse.artist.stats.playcount;
-          //console.log(artistPlayCount);
 
-          // function numberWithCommas(artistPlayCount) {
-          //   return artistPlayCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          // }
+            let artistPlayCount = artistAPIResponse.artist.stats.playcount;
 
-          // numberWithCommas(artistPlayCount);
-          //console.log('hi?');
-          //<p>PLAY COUNT: ${artistPlayCount}</p>
+            function formatNumber(artistPlayCount) {
+              formattedPlayCount = artistPlayCount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+              return formattedPlayCount;
+            }
+          
+            formatNumber(artistPlayCount);
 
-          $('#artist-info').append(
-            `<li>
-            <h3>${artistAPIResponse.artist.name}</h3>
-            <p>${artistAPIResponse.artist.bio.summary}</p>
-
-            
-            
-            <p>Top 5 Tracks:</p>
-              <ul>
+            $('#bio-parent').append(
+              `<h2 id="artist-name" class="artist-card--content--name">${artistAPIResponse.artist.name}</h2>
+                <div class="playcount-wrapper">
+                  <div class="play-button">
+                      <span class="play"></span>
+                  </div>
+                  <p class="playcount">
+                    Play count: <span id="play-count" class="playcount__playcount-selection">${formattedPlayCount}</span>
+                  </p>
+                </div>
+                <h3 class="artist-card__title">Top tracks:</h3>
+                <ul class="artist-card__tracks">
                 <li>${artistTrackAPIResponse.toptracks.track[0].name}</li>
                 <li>${artistTrackAPIResponse.toptracks.track[1].name}</li>
                 <li>${artistTrackAPIResponse.toptracks.track[2].name}</li>
                 <li>${artistTrackAPIResponse.toptracks.track[3].name}</li>
                 <li>${artistTrackAPIResponse.toptracks.track[4].name}</li>
-              </ul>
-            </li>
-            
-            <p>Similar Artists:</p>
-            <ul>
-              <li>${artistAPIResponse.artist.similar.artist[0].name}</li>
-              <li>${artistAPIResponse.artist.similar.artist[1].name}</li>
-              <li>${artistAPIResponse.artist.similar.artist[2].name}</li>
-              <li>${artistAPIResponse.artist.similar.artist[3].name}</li>
-              <li>${artistAPIResponse.artist.similar.artist[4].name}</li>
-            </ul>
-          </li>`
-          );
+                </ul>`
+            );
+
+            $("#biography").append(`<p>${artistAPIResponse.artist.bio.summary}</p>`);
+
+            $("#similar-card").append(`<h3 class="artist-card__title">Similar Artists:</h3>
+            <ul class="artist-card__similar-card--content">
+            <li>${artistAPIResponse.artist.similar.artist[0].name}</li>
+            <li>${artistAPIResponse.artist.similar.artist[1].name}</li>
+            <li>${artistAPIResponse.artist.similar.artist[2].name}</li>
+            <li>${artistAPIResponse.artist.similar.artist[3].name}</li>
+            <li>${artistAPIResponse.artist.similar.artist[4].name}</li>
+            </ul>`);
         }
 
         //display the results section
