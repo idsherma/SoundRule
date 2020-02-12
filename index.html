@@ -1,53 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>SoundRule</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/main.css">
+    <title>SoundRule</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
 
-  <div class="container">
-    <h1 class="headline">SoundRule <span>&#127911;</span></h1>
-    <p class="intro-copy">Search for any artist:</p>
-    <form id="artist-form">
-      <input type="text" name="artist-entry" id="artist-entry" placeholder="e.g., Beyoncé">
-      <button type="submit" id="submit">Submit</button>
-    </form>
+    <div class="container">
+        <h1 class="headline">SoundRule <span>&#127911;</span></h1>
+        <p class="intro-copy">Search for any artist:</p>
+        <form id="artist-form">
+            <input type="text" name="artist-entry" id="artist-entry" placeholder="e.g., Beyoncé">
+            <button type="submit" id="submit">Submit</button>
+        </form>
 
-    <p id="js-error-message" class="error-message"></p>
-    
-    <section id="results" class="hidden">
-      
-      <div class="soundrule-cards">
-            <div class="soundrule-cards__card-wrapper">
-              <div class="artist-card">
-                <div class="artist-card__wrapper">
-                  <div class="photo-parent">
-                      <div id="artist-image"></div>
-                  </div>
-                  
-                  <div id="bio-parent" class="artist-bio-parent"></div>
+        <p id="js-error-message" class="error-message"></p>
+
+        <section id="results" class="hidden">
+
+            <div class="soundrule-cards">
+                <div class="soundrule-cards__card-wrapper">
+                    <div class="artist-card">
+                        <div class="artist-card__wrapper">
+                            <div class="photo-parent">
+                                <div id="artist-image"></div>
+                            </div>
+
+                            <div id="bio-parent" class="artist-bio-parent"></div>
+                        </div>
+
+                        <div id="biography" class="artist-card__copy"></div>
+
+                        <div id="similar-card" class="artist-card__similar-card"></div>
+
+                    </div>
                 </div>
-                
-                <div id="biography" class="artist-card__copy"></div>
-
-                <div id="similar-card" class="artist-card__similar-card"></div>
-                
-              </div>
             </div>
-      </div> 
 
-    </section>
-  </div>
+        </section>
+    </div>
 
-  <!-- PAGE JAVASCRIPT -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="js/index.js"></script>
-  <!-- END PAGE JAVASCRIPT -->
+    <!-- PAGE JAVASCRIPT -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+    <!-- END PAGE JAVASCRIPT -->
 </body>
+
 </html>

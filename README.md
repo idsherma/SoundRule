@@ -1,10 +1,10 @@
 # SoundRule :headphones:
 
 #### Purpose
-The purpose of this app is to help users discover new artists by searching their favorite artists. 
+The purpose of this app is to help users discover new artists by searching their favorite artists. Information about their favorite artist include their top 5 tracks, biography, and similar artists provided by the Last FM API. 
 
 #### Demo
-[Live Demo]()
+[Live Demo](https://www.idsherman.com/SoundRule/)
 
 #### Screenshots
 Login Screen/Landing Page:
