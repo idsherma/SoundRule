@@ -1,4 +1,4 @@
-# SoundRule 
+# SoundRule :headphones:
 
 #### Purpose
 The purpose of this app is to help users discover new artists by searching their favorite artists. 
