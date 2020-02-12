@@ -272,6 +272,10 @@ input[type=text] {
   border-radius: 15px;
 }
 
+.artist-card__similar-card p {
+text-align: center;
+}
+
 
 @media screen and (min-width: 768px) {
 	.soundrule-cards__card-wrapper .artist-card--content--name {
@@ -302,12 +306,7 @@ input[type=text] {
     -ms-flex-align: start;
     align-items: flex-start;
     -ms-flex-wrap: wrap;
-    flex-wrap: wrap
-  }
-
-  .soundrule-cards__card-wrapper .artist-card__wrapper .photo-parent {
-    -ms-flex-preferred-size: 26%;
-    flex-basis: 26%
+    flex-wrap: wrap;
   }
 
   .soundrule-cards__card-wrapper .artist-card--content--name {
