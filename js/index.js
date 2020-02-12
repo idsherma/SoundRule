@@ -119,7 +119,7 @@
 
 		//display the results section
 		$('#results').removeClass('hidden');
-
+    $('#results').addClass('visible');
 	}
 
 	function displayResults(artistTrackAPIResponse, artistAPIResponse) {
@@ -204,7 +204,8 @@
 		}
 
 		//display the results section
-		$('#results').removeClass('hidden');
+    $('#results').removeClass('hidden');
+    $('#results').addClass('visible');
 
 	}
 

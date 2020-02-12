@@ -91,7 +91,15 @@ input[type=text] {
 }
 
 .hidden {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s linear;
 }
 
 .soundrule-cards {
@@ -229,7 +237,7 @@ input[type=text] {
 	text-transform: uppercase;
 	font-weight: 500;
 	letter-spacing: 2px;
-	color: grey
+	color: grey;
 }
 
 .soundrule-cards__card-wrapper .artist-card__wrapper .artist-bio-parent .playcount-wrapper .playcount__playcount-selection {
@@ -273,7 +281,7 @@ input[type=text] {
 }
 
 .artist-card__similar-card p {
-text-align: center;
+  text-align: center;
 }
 
 
@@ -324,7 +332,6 @@ text-align: center;
     margin: 0;
   }
   
-
   .soundrule-cards__card-wrapper .artist-card__wrapper .artist-bio-parent {
     -webkit-box-ordinal-group: 3; 
     -ms-flex-order: 2;

@@ -1,6 +1,17 @@
-# API Capstone
-
-This repo contains starter files for the  API capstone.
+# SoundRule 
 
 #### Purpose
-To help users learn more about their favorite artists and discover new ones.
+The purpose of this app is to help users discover new artists by searching their favorite artists. 
+
+#### Demo
+[Live Demo]()
+
+#### Screenshots
+Login Screen/Landing Page:
+(media/home.jpg)
+
+Results Page:
+(media/search-results.jpg)
+
+#### Technology Used
+HTML/CSS/JavaScript/jQuery
